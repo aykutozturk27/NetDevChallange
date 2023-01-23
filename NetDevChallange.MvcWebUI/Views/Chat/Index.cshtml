@@ -11,26 +11,35 @@
         {
         <label class="form-label">@item.Message</label><br />
         }*@
-        <div class="row p-1">
-            <div class="col-1">User</div>
-            <div class="col-5"><input type="text" id="userInput" /></div>
-        </div>
-        <div class="row p-1">
-            <div class="col-1">Message</div>
-            <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
-        </div>
-        <div class="row p-1">
-            <div class="col-6 text-end">
-                <input type="button" id="sendButton" value="Send Message" />
+        <div class="row g-3 mt-2">
+            <div class="col-auto col-md-2">
+                <label class="col-form-label">User</label>
+            </div>
+            @*<div class="col-auto col-md-2"></div>*@
+            <div class="col-auto col-md-5">
+                <input type="text" class="form-control" id="userInput" readonly/>
             </div>
         </div>
-        <div class="row p-1">
-            <div class="col-6">
+        <div class="row g-3 mt-2">
+            <div class="col-auto col-md-2">
+                <label class="col-form-label">Message</label>
+            </div>
+            <div class="col-auto col-md-5">
+                <input type="text" class="form-control" id="messageInput" />
+            </div>
+        </div>
+        <div class="row g-3 mt-2">
+            <div class="col-md-7 text-md-center">
+                <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+        <div class="row g-3 mt-2">
+            <div class="col-md-7">
                 <hr />
             </div>
         </div>
-        <div class="row p-1">
-            <div class="col-6">
+        <div class="row g-3 mt-2">
+            <div class="col-md-7">
                 <ul id="messagesList">
                     @foreach (var item in Model.Chats)
                     {
@@ -56,8 +65,9 @@
             @foreach (var item in Model.Channels)
             {
                 @*<li class="list-group-item">@Html.ActionLink($"{item.Name}","Index",item.Id)</li>*@
-                <li class="list-group-item">@Html.ActionLink($"{item.Name}","Index", new {id = item.Id}, new {@style = "text-decoration: none"})</li>
-                @*<a href="@item.Id" style="text-decoration: none"><li class="list-group-item">@item.Name</li></a>*@
+                @*<li class="list-group-item">@Html.ActionLink($"{item.Name}","Index", new {id = item.Id}, new {@style = "text-decoration: none"})</li>*@
+                <a href="@item.Id" style="text-decoration: none">
+                <li class="list-group-item">@item.Name</li></a>
             }
         </ul>
     </div>
@@ -65,6 +75,4 @@
 
 @section Scripts{
     <script src="~/js/chat.js"></script>
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 }
