@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.5.0" />
+		<PackageReference Include="FluentValidation" Version="11.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="StackExchange.Redis" Version="2.6.80" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\NetDevChallange.Core\NetDevChallange.Core.csproj" />
+		<ProjectReference Include="..\NetDevChallange.DataAccess\NetDevChallange.DataAccess.csproj" />
+		<ProjectReference Include="..\NetDevChallange.Entities\NetDevChallange.Entities.csproj" />
+	</ItemGroup>
+
+</Project>

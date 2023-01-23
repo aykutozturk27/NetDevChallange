@@ -1,0 +1,70 @@
+﻿@model NetDevChallange.MvcWebUI.Models.GeneralModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    @*Chat kanalı yazışmaları*@
+    <div class="col-md-7" id="chat">
+        @*Yazışmalar*@
+        @*<div class="form-group">*@
+        @*@foreach (var item in Model.Chats)
+        {
+        <label class="form-label">@item.Message</label><br />
+        }*@
+        <div class="row p-1">
+            <div class="col-1">User</div>
+            <div class="col-5"><input type="text" id="userInput" /></div>
+        </div>
+        <div class="row p-1">
+            <div class="col-1">Message</div>
+            <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6 text-end">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6">
+                <hr />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6">
+                <ul id="messagesList">
+                    @foreach (var item in Model.Chats)
+                    {
+                        <li id="messages">@item.Message</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    @*Yazı Alanı*@
+    @*<div class="form-group">
+    <input class="form-control" />
+    </div>
+
+    <div class="form-group">
+    <button class="btn btn-primary" type="submit" id="sendButton"><span class="fas fa-save"></span> Kaydet</button>
+    </div>*@
+    @*</div>*@
+
+    @*Açık kanallar*@
+    <div class="col-md-5">
+        <ul class="list-group">
+            @foreach (var item in Model.Channels)
+            {
+                @*<li class="list-group-item">@Html.ActionLink($"{item.Name}","Index",item.Id)</li>*@
+                <li class="list-group-item">@Html.ActionLink($"{item.Name}","Index", new {id = item.Id}, new {@style = "text-decoration: none"})</li>
+                @*<a href="@item.Id" style="text-decoration: none"><li class="list-group-item">@item.Name</li></a>*@
+            }
+        </ul>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/chat.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+}

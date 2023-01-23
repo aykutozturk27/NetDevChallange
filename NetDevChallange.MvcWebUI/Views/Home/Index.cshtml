@@ -1,0 +1,20 @@
+﻿@model NetDevChallange.Entities.Concrete.User
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <form asp-controller="Home" asp-action="Index" method="post">
+            <div asp-validation-summary="All" class="text-danger small"></div>
+            <div class="form-group mb-3">
+                <label class="form-label" asp-for="UserName"></label>
+                <input class="form-control" asp-for="UserName" type="text" placeholder="Lütfen kullanıcı adınızı(nickname) giriniz" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group d-grid mb-3">
+                <button class="btn btn-primary d-block" type="submit"><span class="fas fa-sign-in-alt"></span> Giriş Yap</button>
+            </div>
+        </form>
+    </div>
+</div>
