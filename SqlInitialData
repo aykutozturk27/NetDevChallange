@@ -1,0 +1,34 @@
+USE [NetDevChallange]
+GO
+SET IDENTITY_INSERT [dbo].[Channels] ON 
+GO
+INSERT [dbo].[Channels] ([Id], [Name], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (1, N'Channel 1', CAST(N'2022-01-10T00:00:00.0000000' AS DateTime2), N'mrrobot', CAST(N'2022-01-10T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Channels] ([Id], [Name], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (2, N'Channel 2', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), N'mrprogrammer', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Channels] ([Id], [Name], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (3, N'Channel 3', CAST(N'2022-01-12T00:00:00.0000000' AS DateTime2), N'mrrobot', CAST(N'2022-01-12T00:00:00.0000000' AS DateTime2), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Channels] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (1, N'mrrobot', CAST(N'2022-01-09T00:00:00.0000000' AS DateTime2), N'mrrobot', CAST(N'2022-01-09T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (2, N'mrprogrammer', CAST(N'2022-01-09T00:00:00.0000000' AS DateTime2), N'mrprogrammer', CAST(N'2022-01-09T00:00:00.0000000' AS DateTime2), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Chats] ON 
+GO
+INSERT [dbo].[Chats] ([Id], [Message], [UserId], [ChannelId], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (1, N'Test 1', 1, 1, CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), N'mrrobot', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Chats] ([Id], [Message], [UserId], [ChannelId], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (2, N'Test 2', 1, 2, CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), N'mrprogrammer', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Chats] ([Id], [Message], [UserId], [ChannelId], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (3, N'Test 3', 2, 1, CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), N'mrrobot', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Chats] ([Id], [Message], [UserId], [ChannelId], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (4, N'Test 4', 2, 2, CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), N'mrprogrammer', CAST(N'2022-01-11T00:00:00.0000000' AS DateTime2), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Chats] OFF
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20230122181417_Init', N'7.0.2')
+GO
