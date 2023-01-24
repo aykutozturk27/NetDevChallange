@@ -1,7 +1,10 @@
-﻿$(document).ready(function () {
+﻿var chanId;
+
+$(document).ready(function () {
     $(".list-group-item").on("click", function () {
         $('.active').removeClass('active');
         $(this).addClass('active');
+        chanId = $(this).attr("data-id");
     })
 });
 
@@ -11,12 +14,20 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
-    var li = document.getElementById("messages");
-    document.getElementById("messagesList").appendChild(li);
-    // We can assign user-supplied strings to an element's textContent because it
-    // is not interpreted as markup. If you're assigning in any other way, you 
-    // should be aware of possible script injection concerns.
-    li.textContent = `${user} says ${message}`;
+    $.ajax({
+        url: '/Chat/Index',
+        type: 'post',
+        data: { message: message, username: user, channelId: chanId },
+        success: function () {
+            toastr.success("Mesaj başarılı bir şekilde eklendi.")
+            var li = document.getElementById("messages");
+            document.getElementById("messagesList").appendChild(li);
+            li.textContent = `${user} : ${message}`;
+        },
+        error: function () {
+            toastr.error("Bir hata oluştu");
+        }
+    })
 });
 
 connection.start().then(function () {

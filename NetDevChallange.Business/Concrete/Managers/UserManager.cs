@@ -13,7 +13,7 @@ namespace NetDevChallange.Business.Concrete.Managers
             _userDal = userDal;
         }
 
-        public async Task<User> Add(User user)
+        public async Task<User> AddAsync(User user)
         {
             var userCheck = await _userDal.GetAsync(x => x.UserName == user.UserName);
             if (userCheck == null)
@@ -23,9 +23,14 @@ namespace NetDevChallange.Business.Concrete.Managers
             return userCheck;
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
             return await _userDal.GetAsync(x => x.Id == id);
+        }
+
+        public async Task<User> GetByNameAsync(string name)
+        {
+            return await _userDal.GetAsync(x => x.UserName == name);
         }
     }
 }

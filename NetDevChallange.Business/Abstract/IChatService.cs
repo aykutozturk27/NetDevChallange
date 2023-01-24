@@ -4,7 +4,7 @@ namespace NetDevChallange.Business.Abstract
 {
     public interface IChatService
     {
-        Task<List<Chat>> GetAllByChannelId(int channelId);
-        Task<Chat> Add(Chat chat);
+        Task<List<Chat>> GetAllByChannelIdAsync(int channelId);
+        Task<Chat> AddAsync(Chat chat);
     }
 }

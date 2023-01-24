@@ -5,19 +5,13 @@
 <div class="row">
     @*Chat kanalı yazışmaları*@
     <div class="col-md-7" id="chat">
-        @*Yazışmalar*@
-        @*<div class="form-group">*@
-        @*@foreach (var item in Model.Chats)
-        {
-        <label class="form-label">@item.Message</label><br />
-        }*@
+        @*Yazı Alanı*@
         <div class="row g-3 mt-2">
             <div class="col-auto col-md-2">
                 <label class="col-form-label">User</label>
             </div>
-            @*<div class="col-auto col-md-2"></div>*@
             <div class="col-auto col-md-5">
-                <input type="text" class="form-control" id="userInput" readonly/>
+                <input type="text" class="form-control" id="userInput" />
             </div>
         </div>
         <div class="row g-3 mt-2">
@@ -38,38 +32,28 @@
                 <hr />
             </div>
         </div>
+
+        @*Yazışmalar*@
         <div class="row g-3 mt-2">
             <div class="col-md-7">
                 <ul id="messagesList">
                     @foreach (var item in Model.Chats)
                     {
-                        <li id="messages">@item.Message</li>
+                        <li id="messages">@item.User.UserName : @item.Message</li>
                     }
                 </ul>
             </div>
         </div>
     </div>
-    @*Yazı Alanı*@
-    @*<div class="form-group">
-    <input class="form-control" />
-    </div>
-
-    <div class="form-group">
-    <button class="btn btn-primary" type="submit" id="sendButton"><span class="fas fa-save"></span> Kaydet</button>
-    </div>*@
-    @*</div>*@
 
     @*Açık kanallar*@
     <div class="col-md-5">
-        <ul class="list-group">
+        <div class="list-group">
             @foreach (var item in Model.Channels)
             {
-                @*<li class="list-group-item">@Html.ActionLink($"{item.Name}","Index",item.Id)</li>*@
-                @*<li class="list-group-item">@Html.ActionLink($"{item.Name}","Index", new {id = item.Id}, new {@style = "text-decoration: none"})</li>*@
-                <a href="@item.Id" style="text-decoration: none">
-                <li class="list-group-item">@item.Name</li></a>
+                <a data-id="@item.Id" href="/Chat/Index/@item.Id" class="list-group-item" style="text-decoration: none">@item.Name</a>
             }
-        </ul>
+        </div>
     </div>
 </div>
 

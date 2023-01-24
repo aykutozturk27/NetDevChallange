@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using NetDevChallange.Business.Abstract;
 using NetDevChallange.Entities.Concrete;
 using NetDevChallange.MvcWebUI.Models;
@@ -10,13 +9,13 @@ namespace NetDevChallange.MvcWebUI.Controllers
     {
         private readonly IChatService _chatService;
         private readonly IChannelService _channelService;
-        private readonly IHubContext<ChatHub> _hubContext;
+        private readonly IUserService _userService;
 
-        public ChatController(IChatService chatService, IChannelService channelService, IHubContext<ChatHub> hubContext)
+        public ChatController(IChatService chatService, IChannelService channelService, IUserService userService)
         {
             _chatService = chatService;
             _channelService = channelService;
-            _hubContext = hubContext;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -24,17 +23,27 @@ namespace NetDevChallange.MvcWebUI.Controllers
         {
             var model = new GeneralModel
             {
-                Channels = await _channelService.GetAll(),
-                Chats = await _chatService.GetAllByChannelId(id),
+                Channels = await _channelService.GetAllAsync(),
+                Chats = await _chatService.GetAllByChannelIdAsync(id),
             };
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Index(Chat chat)
-        //{
-        //    await _hubContext.Clients.All.SendAsync("lastChat", chat);
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Index(string message, string username, int channelId)
+        {
+            var user = await _userService.GetByNameAsync(username);
+            Chat chat = new()
+            {
+                Message = message,
+                ChannelId = channelId,
+                UserId = user.Id,
+                CreatedOn = DateTime.Now,
+                CreatedBy = username,
+                UpdatedOn = DateTime.Now
+            };
+            var addedChat = await _chatService.AddAsync(chat);
+            return View(addedChat);
+        }
     }
 }

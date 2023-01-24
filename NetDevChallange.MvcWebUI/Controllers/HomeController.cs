@@ -24,7 +24,7 @@ namespace NetDevChallange.MvcWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userService.Add(user);
+                await _userService.AddAsync(user);
                 return RedirectToAction("Index", "Chat");
             }
             return View(user);

@@ -18,7 +18,7 @@ namespace NetDevChallange.Business.Concrete.Managers
             _redisBaseRepository = redisBaseRepository;
         }
 
-        public async Task<Chat> Add(Chat chat)
+        public async Task<Chat> AddAsync(Chat chat)
         {
             _redisBaseRepository.Set("chat", chat, duration: 5);
             var addedChat = _redisBaseRepository.Get<Chat>("chat");
@@ -26,9 +26,9 @@ namespace NetDevChallange.Business.Concrete.Managers
             return addedChat;
         }
 
-        public async Task<List<Chat>> GetAllByChannelId(int channelId)
+        public async Task<List<Chat>> GetAllByChannelIdAsync(int channelId)
         {
-            var chatList = await _chatDal.GetListAsync(x => x.ChannelId == channelId, c => c.Channel);
+            var chatList = await _chatDal.GetListAsync(x => x.ChannelId == channelId, c => c.Channel, c => c.User);
 
             JsonSerializerOptions options = new()
             {
@@ -36,7 +36,7 @@ namespace NetDevChallange.Business.Concrete.Managers
                 WriteIndented = true
             };
 
-            string serialize = System.Text.Json.JsonSerializer.Serialize(chatList, options);
+            string serialize = JsonSerializer.Serialize(chatList, options);
             _redisBaseRepository.Set("chat", serialize, duration: 5);
             return chatList;
         }

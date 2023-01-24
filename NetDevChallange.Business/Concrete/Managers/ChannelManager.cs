@@ -13,7 +13,7 @@ namespace NetDevChallange.Business.Concrete.Managers
             _channelDal = channelDal;
         }
 
-        public async Task<List<Channel>> GetAll()
+        public async Task<List<Channel>> GetAllAsync()
         {
             return await _channelDal.GetListAsync();
         }

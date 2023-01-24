@@ -4,7 +4,8 @@ namespace NetDevChallange.Business.Abstract
 {
     public interface IUserService
     {
-        Task<User> Add(User user);
-        Task<User> GetById(int id);
+        Task<User> AddAsync(User user);
+        Task<User> GetByIdAsync(int id);
+        Task<User> GetByNameAsync(string name);
     }
 }

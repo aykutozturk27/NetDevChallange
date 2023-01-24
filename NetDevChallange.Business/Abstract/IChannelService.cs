@@ -4,6 +4,6 @@ namespace NetDevChallange.Business.Abstract
 {
     public interface IChannelService
     {
-        Task<List<Channel>> GetAll();
+        Task<List<Channel>> GetAllAsync();
     }
 }
