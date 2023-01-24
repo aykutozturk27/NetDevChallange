@@ -6,27 +6,29 @@
     @*Chat kanalı yazışmaları*@
     <div class="col-md-7" id="chat">
         @*Yazı Alanı*@
-        <div class="row g-3 mt-2">
-            <div class="col-auto col-md-2">
-                <label class="col-form-label">User</label>
+        <form asp-controller="Chat" asp-action="Index" method="post">
+            <div class="row g-3 mt-2">
+                <div class="col-auto col-md-2">
+                    <label class="form-label">User</label>
+                </div>
+                <div class="col-auto col-md-5">
+                    <input type="text" class="form-control" id="userInput" />
+                </div>
             </div>
-            <div class="col-auto col-md-5">
-                <input type="text" class="form-control" id="userInput" />
+            <div class="row g-3 mt-2">
+                <div class="col-auto col-md-2">
+                    <label class="form-label">Message</label>
+                </div>
+                <div class="col-auto col-md-5">
+                    <input type="text" class="form-control" id="messageInput" />
+                </div>
             </div>
-        </div>
-        <div class="row g-3 mt-2">
-            <div class="col-auto col-md-2">
-                <label class="col-form-label">Message</label>
+            <div class="row g-3 mt-2">
+                <div class="col-md-7 text-md-center">
+                    <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" disabled />
+                </div>
             </div>
-            <div class="col-auto col-md-5">
-                <input type="text" class="form-control" id="messageInput" />
-            </div>
-        </div>
-        <div class="row g-3 mt-2">
-            <div class="col-md-7 text-md-center">
-                <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" />
-            </div>
-        </div>
+        </form>
         <div class="row g-3 mt-2">
             <div class="col-md-7">
                 <hr />
@@ -51,7 +53,7 @@
         <div class="list-group">
             @foreach (var item in Model.Channels)
             {
-                <a data-id="@item.Id" href="/Chat/Index/@item.Id" class="list-group-item" style="text-decoration: none">@item.Name</a>
+                <a data-id="@item.Id" href="/Chat/Index/@item.Id" class="list-group-item list-group-item-action" style="text-decoration: none">@item.Name</a>
             }
         </div>
     </div>

@@ -10,6 +10,7 @@ namespace NetDevChallange.Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserValidator>().As<IValidator<User>>().SingleInstance();
+            builder.RegisterType<ChatValidator>().As<IValidator<Chat>>().SingleInstance();
         }
     }
 }

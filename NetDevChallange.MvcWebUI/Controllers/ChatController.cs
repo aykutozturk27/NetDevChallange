@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NetDevChallange.Business.Abstract;
 using NetDevChallange.Entities.Concrete;
 using NetDevChallange.MvcWebUI.Models;

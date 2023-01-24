@@ -1,7 +1,7 @@
 ﻿var chanId;
 
 $(document).ready(function () {
-    $(".list-group-item").on("click", function () {
+    $(document).on("click", ".list-group-item", function () {
         $('.active').removeClass('active');
         $(this).addClass('active');
         chanId = $(this).attr("data-id");
@@ -25,7 +25,12 @@ connection.on("ReceiveMessage", function (user, message) {
             li.textContent = `${user} : ${message}`;
         },
         error: function () {
-            toastr.error("Bir hata oluştu");
+            if (user == null || user == "") {
+                toastr.error("Kullanıcı adı boş geçilemez");
+            }
+            if (message == null || message == "") {
+                toastr.error("Mesaj boş geçilemez");
+            }
         }
     })
 });
@@ -37,6 +42,7 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
+    $(this).removeAttr("readonly");
     var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
     connection.invoke("SendMessage", user, message).catch(function (err) {

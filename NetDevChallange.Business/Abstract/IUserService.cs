@@ -7,5 +7,6 @@ namespace NetDevChallange.Business.Abstract
         Task<User> AddAsync(User user);
         Task<User> GetByIdAsync(int id);
         Task<User> GetByNameAsync(string name);
+        Task<List<User>> GetAllAsync();
     }
 }

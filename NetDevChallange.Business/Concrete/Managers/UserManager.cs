@@ -23,6 +23,11 @@ namespace NetDevChallange.Business.Concrete.Managers
             return userCheck;
         }
 
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await _userDal.GetListAsync();
+        }
+
         public async Task<User> GetByIdAsync(int id)
         {
             return await _userDal.GetAsync(x => x.Id == id);
