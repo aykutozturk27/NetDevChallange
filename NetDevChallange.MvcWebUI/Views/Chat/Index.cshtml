@@ -9,18 +9,20 @@
         <form asp-controller="Chat" asp-action="Index" method="post">
             <div class="row g-3 mt-2">
                 <div class="col-auto col-md-2">
-                    <label class="form-label">User</label>
+                    <label class="form-label" asp-for="@Model.Chat.User.UserName">User</label>
                 </div>
                 <div class="col-auto col-md-5">
-                    <input type="text" class="form-control" id="userInput" />
+                    <input type="text" class="form-control" id="userInput" asp-for="@Model.Chat.User.UserName" />
+                    <span asp-validation-for="@Model.Chat.User.UserName" class="text-danger"></span>
                 </div>
             </div>
             <div class="row g-3 mt-2">
                 <div class="col-auto col-md-2">
-                    <label class="form-label">Message</label>
+                    <label class="form-label" asp-for="@Model.Chat.Message">Message</label>
                 </div>
                 <div class="col-auto col-md-5">
-                    <input type="text" class="form-control" id="messageInput" />
+                    <input type="text" class="form-control" id="messageInput" asp-for="@Model.Chat.Message" />
+                    <span asp-validation-for="@Model.Chat.Message" class="text-danger"></span>
                 </div>
             </div>
             <div class="row g-3 mt-2">

@@ -25,12 +25,7 @@ connection.on("ReceiveMessage", function (user, message) {
             li.textContent = `${user} : ${message}`;
         },
         error: function () {
-            if (user == null || user == "") {
-                toastr.error("Kullanıcı adı boş geçilemez");
-            }
-            if (message == null || message == "") {
-                toastr.error("Mesaj boş geçilemez");
-            }
+            toastr.error("Bir hata oluştu");
         }
     })
 });

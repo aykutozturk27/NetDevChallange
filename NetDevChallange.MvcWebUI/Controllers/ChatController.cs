@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using NetDevChallange.Business.Abstract;
 using NetDevChallange.Entities.Concrete;
 using NetDevChallange.MvcWebUI.Models;
@@ -29,22 +28,29 @@ namespace NetDevChallange.MvcWebUI.Controllers
             };
             return View(model);
         }
-
+        
         [HttpPost]
-        public async Task<IActionResult> Index(string message, string username, int channelId)
+        public async Task<IActionResult> Index(Chat chat)
         {
-            var user = await _userService.GetByNameAsync(username);
-            Chat chat = new()
+            if (ModelState.IsValid)
             {
-                Message = message,
-                ChannelId = channelId,
-                UserId = user.Id,
-                CreatedOn = DateTime.Now,
-                CreatedBy = username,
-                UpdatedOn = DateTime.Now
-            };
-            var addedChat = await _chatService.AddAsync(chat);
-            return View(addedChat);
+                var user = await _userService.GetByNameAsync(chat.User.UserName);
+                Chat newChat = new()
+                {
+                    Message = chat.Message,
+                    ChannelId = chat.Channel.Id,
+                    UserId = user.Id,
+                    CreatedOn = DateTime.Now,
+                    CreatedBy = user.UserName,
+                    UpdatedOn = DateTime.Now
+                };
+                var addedChat = await _chatService.AddAsync(newChat);
+                return View(addedChat);
+            }
+            else
+            {
+                return View(chat);
+            }
         }
     }
 }
