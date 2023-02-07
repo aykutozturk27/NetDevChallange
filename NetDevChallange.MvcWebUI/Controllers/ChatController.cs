@@ -2,6 +2,7 @@
 using NetDevChallange.Business.Abstract;
 using NetDevChallange.Entities.Concrete;
 using NetDevChallange.MvcWebUI.Models;
+using Newtonsoft.Json;
 
 namespace NetDevChallange.MvcWebUI.Controllers
 {
@@ -32,25 +33,22 @@ namespace NetDevChallange.MvcWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Chat chat)
         {
+            var checkUser = await _userService.GetByNameAsync(chat.User.UserName);
+            var addedChat = new Chat();
             if (ModelState.IsValid)
             {
-                var user = await _userService.GetByNameAsync(chat.User.UserName);
                 Chat newChat = new()
                 {
                     Message = chat.Message,
-                    ChannelId = chat.Channel.Id,
-                    UserId = user.Id,
+                    ChannelId = chat.ChannelId,
+                    UserId = checkUser.Id,
                     CreatedOn = DateTime.Now,
-                    CreatedBy = user.UserName,
+                    CreatedBy = checkUser.UserName,
                     UpdatedOn = DateTime.Now
                 };
-                var addedChat = await _chatService.AddAsync(newChat);
-                return View(addedChat);
+                addedChat = await _chatService.AddAsync(newChat);
             }
-            else
-            {
-                return View(chat);
-            }
+            return Json(addedChat);
         }
     }
 }
